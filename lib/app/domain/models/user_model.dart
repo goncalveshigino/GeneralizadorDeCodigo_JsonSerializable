@@ -1,37 +1,21 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'user_model.freezed.dart';
+//import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
-@JsonSerializable(createToJson: false)
-class User {
-  final int id;
-  final String username;
-
-  @JsonKey(readValue: _readAvatar)
-  String avatar;
- 
- final List<Occupation> occupations;
-
-  User({
-    required this.id, 
-    required this.username, 
-    required this.avatar, 
-    required this.occupations
-    });
+@freezed
+class User with _$User {
+  factory User({
+    required int id,
+    required String username,
+    required int? age,
+    @JsonKey(readValue: _readAvatar) 
+    required String avatar,
+  }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
-  User copyWith({
-    int? id, 
-    String? username, 
-    String? avatar, 
-    List<Occupation>? occupations
-    }) => User(
-      id: id ?? this.id,
-      username: username ?? this.username,
-      avatar: avatar ?? this.avatar, 
-      occupations: occupations ?? this.occupations
-      );
 }
 
 String _readAvatar(Map json, String key) {
@@ -39,15 +23,4 @@ String _readAvatar(Map json, String key) {
 }
 
 
-@JsonSerializable(createToJson: false)
-class Occupation {
-  final int id;
-  final String name;
-
-  Occupation({
-    required this.id, 
-    required this.name,
-  });
-
-  factory Occupation.fromJson(Map<String, dynamic> json) => _$OccupationFromJson(json);
-}
+  
