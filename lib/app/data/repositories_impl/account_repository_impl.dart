@@ -13,9 +13,7 @@ class AccountRepositoryImpl implements AccountRepository {
     );
 
     final userAsString = await rootBundle.loadString('assets/jsons/user.json');
-    final json = Map<String, dynamic>.from(
-      jsonDecode(userAsString)
-    );
+    final json = Map<String, dynamic>.from(jsonDecode(userAsString));
     return User.fromJson(json);
   }
 }

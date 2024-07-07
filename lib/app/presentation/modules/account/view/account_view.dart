@@ -47,6 +47,8 @@ class _AccountViewState extends State<AccountView> {
                     onTap: () {
                       setState(() {
                         _user = _user?.copyWith(
+                          id: 12345,
+                          age: 18,
                           username: DateTime.now().toString()
                         );
                       });
